@@ -1,0 +1,26 @@
+﻿<div class="modal fade" id="AddPhotoPopUp" role="dialog">
+    <div class="modal-dialog err-pop">
+        <div class="modal-content">
+            <div class="modal-header">
+                <p id="AddPhotoModalHeaderText">Agregar foto</p>
+            </div>
+            <div class="modal-body" style="text-align:center;">
+                <form>
+                    <div class="form-group noMarginBottom">
+                        <input type="text" class="form-control" id="TitleInput" placeholder="Inserte el título de la foto" maxlength="50">
+                        <p id="TitleValidationText" class="inputValidationText">Este campo es obligatorio.</p>
+                        <br id="TitleSeparator" />
+                        <textarea class="form-control" id="DescriptionInput" rows="4" placeholder="Inserte la descripción de la foto" maxlength="250"></textarea>
+                        <p id="DescriptionValidationText" class="inputValidationText">Este campo es obligatorio.</p>
+                        <br id="DescriptionSeparator" />
+                        <input class="form-control vertical-center" id="AddPhotoFileInput" type="file" name="file_name"/>
+                        <p id="FileValidationText" class="inputValidationText">Este campo es obligatorio.</p>
+                        <br id="FileSeparator" />
+                    </div>
+                    <button class="btn btn-primary awaitFile" value="AddPhotoFileInput">Aceptar</button>
+                    <button class="btn btn-primary" id="CloseBtn">Cancelar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

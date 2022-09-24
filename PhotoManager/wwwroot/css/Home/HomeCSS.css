@@ -1,0 +1,18 @@
+﻿#AddPhotoFileInput {
+    margin: auto auto;
+    padding: 1.5px 0 0 5px !important;
+}
+.modal-header{
+    padding: 8px 8px 8px 8px;
+}
+#AddPhotoModalHeaderText{
+    margin: 8px 0px 0px 8px;
+}
+.inputValidationText{
+    font-size: smaller;
+    color: red;
+    margin: 0 0 0 0;
+}
+.noMarginBottom{
+    margin-bottom: 0px;
+}
