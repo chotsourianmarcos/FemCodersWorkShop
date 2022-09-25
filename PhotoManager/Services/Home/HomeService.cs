@@ -1,4 +1,7 @@
-﻿using PhotoManager.Models.Home;
+﻿using Entities.Entities;
+using Logic.DataLogic.PhotoLogic;
+using Logic.Models;
+using PhotoManager.Models.Home;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,21 +11,42 @@ namespace PhotoManager.Services.Home
 {
     public class HomeService : IHomeService
     {
-        public List<PhotoModel> GetPhotosByCriteria(PhotosSearchCriteriaModel photosSearchCriteriaModel)
+        public readonly IPhotoLogic _photoLogic;
+        public HomeService(IPhotoLogic photoLogic)
         {
-            return new List<PhotoModel>();
+            _photoLogic = photoLogic;
         }
-        public int AddPhoto(PhotoModel photoModel)
+        public async Task<IEnumerable<PhotoModel>> GetAllPhotos()
         {
-            return 1;
+            var photoEntities = await _photoLogic.GetAllPhotos();
+            var resultList = new List<PhotoModel>();
+            foreach(PhotoEntity a in photoEntities)
+            {
+                resultList.Add((PhotoModel)a);
+            }
+            return resultList;
         }
-        public int DeletePhoto(PhotoModel photoModel)
+        public async Task<IEnumerable<PhotoModel>> GetPhotosByCriteria(PhotoSearchCriteriaModel photoSearchCriteriaModel)
         {
-            return 1;
+            var photoEntities = await _photoLogic.GetPhotosByCriteria(photoSearchCriteriaModel);
+            var resultList = new List<PhotoModel>();
+            foreach (PhotoEntity a in photoEntities)
+            {
+                resultList.Add((PhotoModel)a);
+            }
+            return resultList;
         }
-        public int UpdatePhoto(PhotoModel photoModel)
+        public async Task<int> AddPhoto(PhotoModel photoModel)
         {
-            return 1;
+            return await _photoLogic.AddPhotoEntity(photoModel.ToPhotoEntity());
+        }
+        public async Task<int> DeletePhoto(PhotoModel photoModel)
+        {
+            return await _photoLogic.UpdatePhotoEntity(photoModel.ToPhotoEntity());
+        }
+        public async Task<int> UpdatePhoto(PhotoModel photoModel)
+        {
+            return await _photoLogic.DeletePhotoEntity(photoModel.ToPhotoEntity());
         }
     }
 }

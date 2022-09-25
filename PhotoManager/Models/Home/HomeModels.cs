@@ -11,20 +11,25 @@ namespace PhotoManager.Models.Home
         public HomeModel()
         {
             PhotoModel = new PhotoModel();
-            PhotosSearchCriteriaModel = new PhotosSearchCriteriaModel();
-            AddPhotoPopUpVM = new AddPhotoPopUp();
         }
         public PhotoModel PhotoModel { get; set; }
-        public PhotosSearchCriteriaModel PhotosSearchCriteriaModel { get; set; }
-        public AddPhotoPopUp AddPhotoPopUpVM { get; set; }
     }
     public class PhotoModel : PhotoEntity
     {
-    }
-    public class PhotosSearchCriteriaModel
-    {
-    }
-    public class AddPhotoPopUp
-    {
+        //Model properties not implemented
+        public PhotoEntity ToPhotoEntity()
+        {
+            var photoEntity = new PhotoEntity();
+            photoEntity.Id = this.Id;
+            photoEntity.IdWeb = this.IdWeb;
+            photoEntity.Title = this.Title;
+            photoEntity.Description = this.Description;
+            photoEntity.UploadDate = this.UploadDate;
+            photoEntity.UpdateDate = this.UpdateDate;
+            photoEntity.File = this.File;
+            photoEntity.Active = this.Active;
+            photoEntity.UserId = this.UserId;
+            return photoEntity;
+        }
     }
 }

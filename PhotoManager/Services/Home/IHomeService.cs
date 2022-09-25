@@ -1,4 +1,5 @@
-﻿using PhotoManager.Models.Home;
+﻿using Logic.Models;
+using PhotoManager.Models.Home;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,9 +9,10 @@ namespace PhotoManager.Services.Home
 {
     public interface IHomeService
     {
-        List<PhotoModel> GetPhotosByCriteria(PhotosSearchCriteriaModel photosSearchCriteriaModel);
-        int AddPhoto(PhotoModel photoModel);
-        int DeletePhoto(PhotoModel photoModel);
-        int UpdatePhoto(PhotoModel photoModel);
+        Task<IEnumerable<PhotoModel>> GetAllPhotos();
+        Task<IEnumerable<PhotoModel>> GetPhotosByCriteria(PhotoSearchCriteriaModel photoSearchCriteriaModel);
+        Task<int> AddPhoto(PhotoModel photoModel);
+        Task<int> DeletePhoto(PhotoModel photoModel);
+        Task<int> UpdatePhoto(PhotoModel photoModel);
     }
 }

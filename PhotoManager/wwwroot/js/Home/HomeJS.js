@@ -86,6 +86,7 @@ var AcceptNewPhoto = function (photoModel) {
         type: "POST",
         processData: false,
         contentType: false,
+        timeout: 10000,
         /*url: HomeVM.Url + '/AddPhoto',*/
         /*data: JSON.stringify(content),*/
         data: fd,

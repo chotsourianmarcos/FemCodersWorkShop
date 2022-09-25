@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Logic.Models;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
@@ -16,26 +17,18 @@ namespace PhotoManager.Controllers
 {
     public class HomeController : Controller
     {
-        //private readonly ILogger<HomeController> _logger;
-        public AppCustomSettings _appCustomSettings;
+        private readonly ILogger<HomeController> _logger;
         public readonly IHomeService _homeService;
         public HomeModel _homeModel;
         
-
-        //public HomeController(ILogger<HomeController> logger, IHomeService homeService)
-        //{
-        //    _logger = logger;
-        //    _homeService = homeService;
-        //    _homeModel = new HomeModel();
-        //}
-        public HomeController(IOptions<AppCustomSettings> appCustomSettings, IHomeService homeService)
+        public HomeController(ILogger<HomeController> logger, IHomeService homeService)
         {
-            _appCustomSettings = appCustomSettings.Value;
+            _logger = logger;
             _homeService = homeService;
             _homeModel = new HomeModel();
-            _homeModel.Url = _appCustomSettings.Url;
         }
         //ver la posibilidad de hacer un controlador base y eso.
+
         public IActionResult Index()
         {
             return View(_homeModel);
@@ -51,15 +44,16 @@ namespace PhotoManager.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
-        public ActionResult<List<PhotoModel>> GetPhotosByCriteria(PhotosSearchCriteriaModel photosSearchCriteriaModel)
+        public ActionResult<List<PhotoModel>> GetAllPhotos()
         {
-            return _homeService.GetPhotosByCriteria(photosSearchCriteriaModel);
+            return _homeService.GetAllPhotos().Result.ToList();
         }
-        //public IActionResult OpenModelPopup()
-        //{
-        //    //can send some data also.  
-        //    return View("AddPhotoPopUP", this._homeModel.AddPhotoPopUpVM);
-        //}
+
+        public ActionResult<List<PhotoModel>> GetPhotosByCriteria(PhotoSearchCriteriaModel photoSearchCriteriaModel)
+        {
+            return  _homeService.GetPhotosByCriteria(photoSearchCriteriaModel).Result.ToList();
+        }
+
         [HttpPost]
         public ActionResult<int> AddPhoto()
         {
@@ -83,15 +77,17 @@ namespace PhotoManager.Controllers
                 }
             }
             
-            return _homeService.AddPhoto(photoModel);
+            return _homeService.AddPhoto(photoModel).Result;
         }
+
         public ActionResult<int> DeletePhoto(PhotoModel photoModel)
         {
-            return _homeService.DeletePhoto(photoModel);
+            return _homeService.DeletePhoto(photoModel).Result;
         }
+
         public ActionResult<int> UpdatePhoto(PhotoModel photoModel)
         {
-            return _homeService.UpdatePhoto(photoModel);
+            return _homeService.UpdatePhoto(photoModel).Result;
         }
     }
 }

@@ -1,3 +1,4 @@
+using Logic.DataLogic.PhotoLogic;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -26,6 +27,7 @@ namespace PhotoManager
         {
             services.AddControllersWithViews();
             services.AddScoped<IHomeService, HomeService>();
+            services.AddScoped<IPhotoLogic, PhotoLogic>();
             services.AddMvc().AddRazorRuntimeCompilation();
             services.Configure<AppCustomSettings>(Configuration.GetSection("AppCustomSettings"));
         }
