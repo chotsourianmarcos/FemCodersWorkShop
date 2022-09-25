@@ -1,0 +1,24 @@
+﻿<div class="modal fade" id="ModifyPhotoPopUp" role="dialog">
+    <div class="modal-dialog err-pop">
+        <div class="modal-content">
+            <div class="modal-header">
+                <p id="ModifyPhotoModalHeaderText">Modificar foto</p>
+            </div>
+            <div class="modal-body" style="text-align:center;">
+                <form>
+                    <div class="form-group noMarginBottom">
+                        <input type="text" class="form-control" id="ModifyTitleInput" placeholder="Inserte el nuevo título de la foto" maxlength="25">
+                        <p id="ModifyTitleValidationText" class="inputValidationText">Este campo es obligatorio.</p>
+                        <br id="ModifyTitleSeparator" />
+                        <textarea class="form-control" id="ModifyDescriptionInput" rows="4" placeholder="Inserte la nueva descripción de la foto" maxlength="60"></textarea>
+                        <p id="ModifyDescriptionValidationText" class="inputValidationText">Este campo es obligatorio.</p>
+                        <br id="ModifyDescriptionSeparator" />
+                        <br id="ModifyFileSeparator" />
+                    </div>
+                    <button class="btn btn-primary awaitFile" id="AcceptModifyPhoto" >Aceptar</button>
+                    <button class="btn btn-primary" id="ModifyCloseBtn">Cancelar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

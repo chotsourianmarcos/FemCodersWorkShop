@@ -7,12 +7,43 @@
     return PhotoModel;
 }
 
+var IdToModify = 0;
+
 var ShowAddPhotoPopUp = function () {
     $('#AddPhotoPopUp').modal('show');
 }
 var CloseAddPhotoPopUp = function () {
     $('#AddPhotoPopUp').modal('hide');
     /*DEFINIR ClearNewPhotoForm();*/
+}
+var ShowModifyPhotoPopUp = function (id) {
+    $('#ModifyPhotoPopUp').modal('show');
+    IdToModify = id;
+}
+var CloseModifyPhotoPopUp = function (id) {
+    $('#ModifyPhotoPopUp').modal('hide');
+}
+
+var DeletePhoto = function (id) {
+    var fd = new FormData();
+    fd.append('Id', id);
+    $.ajax({
+        url: 'Home/DeletePhoto',
+        type: "POST",
+        processData: false,
+        contentType: false,
+        timeout: 10000,
+        /*url: HomeVM.Url + '/AddPhoto',*/
+        /*data: JSON.stringify(content),*/
+        data: fd,
+        success: function (data) {
+            alert("success");
+        },
+        error: function (xhr, ajaxOptions, thrownError) {
+            alert("error");
+            /*alert(xhr.responseText);*/
+        }
+    });
 }
 
 var TitleValidationErrorControl = function (show) {
@@ -92,13 +123,50 @@ var AcceptNewPhoto = function (photoModel) {
         data: fd,
         success: function (data) {
             alert("success");
+            CloseAddPhotoPopUp();
         },
         error: function (xhr, ajaxOptions, thrownError) {
             alert("error");
+            CloseAddPhotoPopUp();
             /*alert(xhr.responseText);*/
         }
     });
-    CloseAddPhotoPopUp();
+}
+
+var RefreshGallery = function () {
+    $.ajax({
+        url: "/Home/Gallery",
+        type: "post",
+        data: null
+    }).done(function (result) {
+            $("#Gallery").html(result);
+    });
+}
+
+var ModifyPhoto = function (id) {
+    var fd = new FormData();
+    fd.append('id', id);
+    fd.append('title', photoModel.Title);
+    fd.append('description', photoModel.Description);
+    $.ajax({
+        url: 'Home/AddPhoto',
+        type: "POST",
+        processData: false,
+        contentType: false,
+        timeout: 10000,
+        /*url: HomeVM.Url + '/AddPhoto',*/
+        /*data: JSON.stringify(content),*/
+        data: fd,
+        success: function (data) {
+            alert("success");
+            CloseAddPhotoPopUp();
+        },
+        error: function (xhr, ajaxOptions, thrownError) {
+            alert("error");
+            CloseAddPhotoPopUp();
+            /*alert(xhr.responseText);*/
+        }
+    });
 }
 
 
@@ -109,7 +177,13 @@ $(document).ready(function () {
     $("#CloseBtn").click(function () {
         CloseAddPhotoPopUp();
     });
-
+    $("#ModifyCloseBtn").click(function () {
+        CloseModifyPhotoPopUp();
+    });
+    $("#AcceptModifyPhoto").click(function () {
+        ModifyPhoto();
+    });
+    
     //$("#CloseBtn").click(function () {
     //    ClearNewPhotoForm();
     //});
@@ -119,6 +193,8 @@ $(document).ready(function () {
     $('#FileValidationText').hide();
 
     LoadLayoutDocumentReady();
+    RefreshGallery();
 });
 
 //REPASAR BIEN TODO. BUENAS PRÁCTICAS. BREVE. SÓLIDO. CREATIVO. BUENOS NOMBRES DE COSAS. ETCS.
+//VER DE PONER RELOJITOS DE ESPERA Y ESA MERDA.

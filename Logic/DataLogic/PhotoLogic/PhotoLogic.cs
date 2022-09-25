@@ -62,13 +62,12 @@ namespace Logic.DataLogic.PhotoLogic
                 throw new Exception("Error al modificar foto en base.");
             }
         }
-        public async Task<int> DeletePhotoEntity(PhotoEntity photoEntity)
+        public async Task<int> DeletePhotoEntity(int Id)
         {
             try
             {
-                ValidatePhotoEntityInsert(photoEntity);
                 var photoToDelete = _photoManagerContext.Set<PhotoEntity>()
-                    .FirstOrDefault(p => p.Id == photoEntity.Id && p.IdWeb == photoEntity.IdWeb);
+                    .FirstOrDefault(p => p.Id == Id);
                 if (photoToDelete == null)
                 {
                     throw new Exception("La foto que quiere inactivar no fue encontrada en base.");
@@ -86,7 +85,7 @@ namespace Logic.DataLogic.PhotoLogic
         {
             try
             {
-                return  await _photoManagerContext.Photos.ToListAsync();
+                return  await _photoManagerContext.Photos.Where(p => p.Active).ToListAsync();
             }
             catch (Exception e)
             {
@@ -97,7 +96,7 @@ namespace Logic.DataLogic.PhotoLogic
         {
             try
             {
-                return await _photoManagerContext.Photos.ToListAsync();
+                return await _photoManagerContext.Photos.Where(p => p.Active).ToListAsync();
                 //criterias not implemented
             }
             catch (Exception e)

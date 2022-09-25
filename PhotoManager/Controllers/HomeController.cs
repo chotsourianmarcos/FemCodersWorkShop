@@ -44,6 +44,13 @@ namespace PhotoManager.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+        public IActionResult Gallery()
+        {
+            var model = new HomeModel();
+            var obtainedPhotos = _homeService.GetAllPhotos().Result.ToList();
+            model.PhotoModelList = obtainedPhotos;
+            return PartialView("Gallery", model);
+        }
         public ActionResult<List<PhotoModel>> GetAllPhotos()
         {
             return _homeService.GetAllPhotos().Result.ToList();
@@ -80,9 +87,9 @@ namespace PhotoManager.Controllers
             return _homeService.AddPhoto(photoModel).Result;
         }
 
-        public ActionResult<int> DeletePhoto(PhotoModel photoModel)
+        public ActionResult<int> DeletePhoto(int Id)
         {
-            return _homeService.DeletePhoto(photoModel).Result;
+            return _homeService.DeletePhoto(Id).Result;
         }
 
         public ActionResult<int> UpdatePhoto(PhotoModel photoModel)

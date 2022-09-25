@@ -12,7 +12,7 @@ namespace PhotoManager.Services.Home
         Task<IEnumerable<PhotoModel>> GetAllPhotos();
         Task<IEnumerable<PhotoModel>> GetPhotosByCriteria(PhotoSearchCriteriaModel photoSearchCriteriaModel);
         Task<int> AddPhoto(PhotoModel photoModel);
-        Task<int> DeletePhoto(PhotoModel photoModel);
+        Task<int> DeletePhoto(int Id);
         Task<int> UpdatePhoto(PhotoModel photoModel);
     }
 }

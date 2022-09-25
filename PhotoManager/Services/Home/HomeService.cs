@@ -20,9 +20,9 @@ namespace PhotoManager.Services.Home
         {
             var photoEntities = await _photoLogic.GetAllPhotos();
             var resultList = new List<PhotoModel>();
-            foreach(PhotoEntity a in photoEntities)
+            foreach(PhotoEntity p in photoEntities)
             {
-                resultList.Add((PhotoModel)a);
+                resultList.Add(new PhotoModel().FromPhotoEntity(p));
             }
             return resultList;
         }
@@ -30,9 +30,9 @@ namespace PhotoManager.Services.Home
         {
             var photoEntities = await _photoLogic.GetPhotosByCriteria(photoSearchCriteriaModel);
             var resultList = new List<PhotoModel>();
-            foreach (PhotoEntity a in photoEntities)
+            foreach (PhotoEntity p in photoEntities)
             {
-                resultList.Add((PhotoModel)a);
+                resultList.Add(new PhotoModel().FromPhotoEntity(p));
             }
             return resultList;
         }
@@ -40,13 +40,13 @@ namespace PhotoManager.Services.Home
         {
             return await _photoLogic.AddPhotoEntity(photoModel.ToPhotoEntity());
         }
-        public async Task<int> DeletePhoto(PhotoModel photoModel)
+        public async Task<int> DeletePhoto(int Id)
         {
-            return await _photoLogic.UpdatePhotoEntity(photoModel.ToPhotoEntity());
+            return await _photoLogic.DeletePhotoEntity(Id);
         }
         public async Task<int> UpdatePhoto(PhotoModel photoModel)
         {
-            return await _photoLogic.DeletePhotoEntity(photoModel.ToPhotoEntity());
+            return await _photoLogic.UpdatePhotoEntity(photoModel.ToPhotoEntity());
         }
     }
 }
