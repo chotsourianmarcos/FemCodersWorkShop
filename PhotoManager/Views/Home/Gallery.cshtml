@@ -4,8 +4,9 @@
     {
         var actualRow = 1;
         var rowsCount = Model.PhotoModelList.Count % 3 > 0 ? Model.PhotoModelList.Count / 3 + 1 : Model.PhotoModelList.Count / 3;
+        var totalRows = Model.PhotoModelList.Count % 3 > 0 ? Model.PhotoModelList.Count / 3 + 1 : Model.PhotoModelList.Count / 3;
 
-        for (var i = 0; i < rowsCount; i++)
+        for (var i = 0; i < totalRows; i++)
         {
             <div class="row">
 
@@ -18,10 +19,11 @@
                             <p>Sobre: @Model.PhotoModelList[actualRow * 3 - 3].Description</p>
 
                             <img src="data:image/gif;base64,@Model.PhotoModelList[actualRow * 3 - 3].Base64File"
-                                 alt="Imagen" />
+                                 alt="Imagen" class="imageObj" />
                             <br />
-                            <button class="btn btn-primary modifyPhotoBtn" value="@Model.PhotoModelList[actualRow * 3 - 3].Id">Modificar</button>
-                            <button class="btn btn-primary deletePhotoBtn" value="@Model.PhotoModelList[actualRow * 3 - 3].Id">Cancelar</button>
+                            <button href="#" class="btn btn-primary modifyPhotoBtn" onClick="ShowModifyPhotoPopUp(@Model.PhotoModelList[actualRow * 3 - 3].Id);">Modificar</button>
+                            <button href="#" class="btn btn-primary deletePhotoBtn" onClick="DeletePhoto(@Model.PhotoModelList[actualRow * 3 - 3].Id);">Borrar</button>
+                            <hr/>
                         </div>
                     }
                 }
@@ -29,36 +31,36 @@
                 @{
                     if (Model.PhotoModelList.Count >= actualRow * 3 - 1)
                     {
-                        <div class="col-lg-4 col-md-12 mb-4 mb-lg-0 loadedImageDiv">
+                                <div class="col-lg-4 col-md-12 mb-4 mb-lg-0 loadedImageDiv">
 
-                            <h6>@Model.PhotoModelList[actualRow * 3 - 2].Title</h6>
-                            <p>Sobre: @Model.PhotoModelList[actualRow * 3 - 2].Description</p>
+                                    <h6>@Model.PhotoModelList[actualRow * 3 - 2].Title</h6>
+                                    <p>Sobre: @Model.PhotoModelList[actualRow * 3 - 2].Description</p>
 
-                            <img src="data:image/gif;base64,@Model.PhotoModelList[actualRow * 3 - 2].Base64File"
-                                 alt="Imagen" />
-                            <br />
-                            <button class="btn btn-primary modifyPhotoBtn" value="@Model.PhotoModelList[actualRow * 3 - 2].Id">Modificar</button>
-                            <button class="btn btn-primary deletePhotoBtn" value="@Model.PhotoModelList[actualRow * 3 - 2].Id">Cancelar</button>
-
-                        </div>
+                                    <img src="data:image/gif;base64,@Model.PhotoModelList[actualRow * 3 - 2].Base64File"
+                                         alt="Imagen" class="imageObj" />
+                                    <br />
+                                    <button href="#" class="btn btn-primary modifyPhotoBtn" onClick="ShowModifyPhotoPopUp(@Model.PhotoModelList[actualRow * 3 - 2].Id);">Modificar</button>
+                                    <button href="#" class="btn btn-primary deletePhotoBtn" onClick="DeletePhoto(@Model.PhotoModelList[actualRow * 3 - 2].Id);">Borrar</button>
+                                    <hr />
+                                </div>
                     }
                 }
 
                 @{
                     if (Model.PhotoModelList.Count >= actualRow * 3)
                     {
-                        <div class="col-lg-4 col-md-12 mb-4 mb-lg-0 loadedImageDiv">
+                                <div class="col-lg-4 col-md-12 mb-4 mb-lg-0 loadedImageDiv">
 
-                            <h6>@Model.PhotoModelList[actualRow * 3 - 1].Title</h6>
-                            <p>Sobre: @Model.PhotoModelList[actualRow * 3 - 1].Description</p>
+                                    <h6>@Model.PhotoModelList[actualRow * 3 - 1].Title</h6>
+                                    <p>Sobre: @Model.PhotoModelList[actualRow * 3 - 1].Description</p>
 
-                            <img src="data:image/gif;base64,@Model.PhotoModelList[actualRow * 3 - 1].Base64File"
-                                 alt="Imagen" />
-                            <br />
-                            <button class="btn btn-primary modifyPhotoBtn" value="@Model.PhotoModelList[actualRow * 3 - 1].Id">Modificar</button>
-                            <button class="btn btn-primary deletePhotoBtn" value="@Model.PhotoModelList[actualRow * 3 - 1].Id">Cancelar</button>
-
-                        </div>
+                                    <img src="data:image/gif;base64,@Model.PhotoModelList[actualRow * 3 - 1].Base64File"
+                                         alt="Imagen" class="imageObj" />
+                                    <br />
+                                    <button href="#" class="btn btn-primary modifyPhotoBtn" onClick="ShowModifyPhotoPopUp(@Model.PhotoModelList[actualRow * 3 - 1].Id);">Modificar</button>
+                                    <button href="#" class="btn btn-primary deletePhotoBtn" onClick="DeletePhoto(@Model.PhotoModelList[actualRow * 3 - 1].Id);">Borrar</button>
+                                    <hr />
+                                </div>
                     }
                 }
 
@@ -67,27 +69,9 @@
             rowsCount--;
             actualRow++;
         }
-        <script>
-            document.querySelector(".modifyPhotoBtn").addEventListener('click', async function (e) {
-
-                var photoId = e.target.value;
-
-                ShowModifyPhotoPopUp(photoId);
-
-            });
-            document.querySelector(".deletePhotoBtn").addEventListener('click', async function (e) {
-
-                var photoId = e.target.value;
-
-                DeletePhoto(photoId);
-
-            });
-        </script>
     }
     else
     {
         <h2>No hay fotos en la galería aún.</h2>
     }
 }
-<button class="modifyPhotoBtn" style="display:none" ></button>
-<button class="deletePhotoBtn" style="display:none" ></button>

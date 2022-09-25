@@ -41,18 +41,18 @@ namespace Logic.DataLogic.PhotoLogic
                 throw new Exception("Error al insertar foto en base.");
             }
         }
-        public async Task<int> UpdatePhotoEntity(PhotoEntity photoEntity)
+        public async Task<int> UpdatePhotoEntity(int id, string title, string description)
         {
             try
             {
-                ValidatePhotoEntityInsert(photoEntity);
                 var photoToEdit = _photoManagerContext.Set<PhotoEntity>()
-                    .FirstOrDefault(p => p.Id == photoEntity.Id && p.IdWeb == photoEntity.IdWeb);
+                    .FirstOrDefault(p => p.Id == id);
                 if(photoToEdit == null || photoToEdit.Active == false)
                 {
                     throw new Exception("La foto que quiere editar no fue encontrada en base.");
                 }
-                photoToEdit = photoEntity;
+                photoToEdit.Title = title;
+                photoToEdit.Description = description;
                 photoToEdit.UploadDate = DateTime.Now;
                 await _photoManagerContext.SaveChangesAsync();
                 return 200;

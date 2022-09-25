@@ -7,5 +7,6 @@ namespace Logic.Models
 {
     public class PhotoSearchCriteriaModel
     {
+        //not implemented
     }
 }

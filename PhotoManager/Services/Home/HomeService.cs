@@ -44,9 +44,9 @@ namespace PhotoManager.Services.Home
         {
             return await _photoLogic.DeletePhotoEntity(Id);
         }
-        public async Task<int> UpdatePhoto(PhotoModel photoModel)
+        public async Task<int> UpdatePhoto(int id, string title, string description)
         {
-            return await _photoLogic.UpdatePhotoEntity(photoModel.ToPhotoEntity());
+            return await _photoLogic.UpdatePhotoEntity(id, title, description);
         }
     }
 }

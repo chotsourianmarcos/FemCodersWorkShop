@@ -64,27 +64,35 @@ namespace PhotoManager.Controllers
         [HttpPost]
         public ActionResult<int> AddPhoto()
         {
-            var requestForm = Request.Form;
-            var requestFile = requestForm.Files.FirstOrDefault();
-            var requestTitle = requestForm["Title"];
-            var requestDescription = requestForm["Description"];
-
-            var photoModel = new PhotoModel();
-
-            if (requestFile.Length > 0)
+            try
             {
-                using (var ms = new MemoryStream())
+                var requestForm = Request.Form;
+                var requestFile = requestForm.Files.FirstOrDefault();
+                var requestTitle = requestForm["Title"];
+                var requestDescription = requestForm["Description"];
+
+                var photoModel = new PhotoModel();
+
+                if (requestFile.Length > 0)
                 {
-                    requestFile.CopyTo(ms);
-                    photoModel.File = ms.ToArray();
-                    photoModel.Title = requestTitle;
-                    photoModel.Description = requestDescription;
-                    photoModel.UploadDate = DateTime.Now;
-                    photoModel.IdWeb = Guid.NewGuid();
+                    using (var ms = new MemoryStream())
+                    {
+                        requestFile.CopyTo(ms);
+                        photoModel.File = ms.ToArray();
+                        photoModel.Title = requestTitle;
+                        photoModel.Description = requestDescription;
+                        photoModel.UploadDate = DateTime.Now;
+                        photoModel.IdWeb = Guid.NewGuid();
+                    }
                 }
+
+                return _homeService.AddPhoto(photoModel).Result;
             }
-            
-            return _homeService.AddPhoto(photoModel).Result;
+            catch
+            {
+                //solucionar: a veces se cierra el request antes de que se lean los datos...
+                return 404;
+            }
         }
 
         public ActionResult<int> DeletePhoto(int Id)
@@ -92,9 +100,17 @@ namespace PhotoManager.Controllers
             return _homeService.DeletePhoto(Id).Result;
         }
 
-        public ActionResult<int> UpdatePhoto(PhotoModel photoModel)
+        public ActionResult<int> UpdatePhoto(int id, string title, string description)
         {
-            return _homeService.UpdatePhoto(photoModel).Result;
+            try
+            {
+                return _homeService.UpdatePhoto(id, title, description).Result;
+            }
+            catch
+            {
+                //solucionar: a veces se cierra el request antes de que se lean los datos...
+                return 404;
+            }
         }
     }
 }

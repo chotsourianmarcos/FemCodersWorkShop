@@ -1,20 +1,17 @@
-﻿var CreatePhotoModel = function (title, description, photoFile) {
-    var PhotoModel = {
-        Title: title,
-        Description: description,
-        PhotoFile: photoFile
-    }
-    return PhotoModel;
-}
-
+﻿//variables
 var IdToModify = 0;
 
+//modal pop ups
 var ShowAddPhotoPopUp = function () {
     $('#AddPhotoPopUp').modal('show');
 }
 var CloseAddPhotoPopUp = function () {
     $('#AddPhotoPopUp').modal('hide');
-    /*DEFINIR ClearNewPhotoForm();*/
+    document.getElementById("AddTitleInput").value = "";
+    document.getElementByClass("addDescriptionInput").value ="";
+    document.querySelector(btnIdSelector).value = null;
+    AddTitleValidationErrorControl(false);
+    AddDescriptionValidationErrorControl(false);
 }
 var ShowModifyPhotoPopUp = function (id) {
     $('#ModifyPhotoPopUp').modal('show');
@@ -22,46 +19,30 @@ var ShowModifyPhotoPopUp = function (id) {
 }
 var CloseModifyPhotoPopUp = function (id) {
     $('#ModifyPhotoPopUp').modal('hide');
+    document.getElementById("ModifyTitleInput").value = "";
+    document.getElementById("ModifyDescriptionInput").value = "";
+    ModifyTitleValidationErrorControl(false);
+    ModifyDescriptionValidationErrorControl(false);
+    IdToModify = 0;
 }
 
-var DeletePhoto = function (id) {
-    var fd = new FormData();
-    fd.append('Id', id);
-    $.ajax({
-        url: 'Home/DeletePhoto',
-        type: "POST",
-        processData: false,
-        contentType: false,
-        timeout: 10000,
-        /*url: HomeVM.Url + '/AddPhoto',*/
-        /*data: JSON.stringify(content),*/
-        data: fd,
-        success: function (data) {
-            alert("success");
-        },
-        error: function (xhr, ajaxOptions, thrownError) {
-            alert("error");
-            /*alert(xhr.responseText);*/
-        }
-    });
-}
-
-var TitleValidationErrorControl = function (show) {
+//Validación campos
+var AddTitleValidationErrorControl = function (show) {
     if (show) {
-        $('#TitleValidationText').show()
-        $('#TitleSeparator').hide();
+        $('#AddTitleValidationText').show()
+        $('#AddTitleSeparator').hide();
     } else {
-        $('#TitleValidationText').hide()
-        $('#TitleSeparator').show();
+        $('#AddTitleValidationText').hide()
+        $('#AddTitleSeparator').show();
     }
 }
-var DescriptionValidationErrorControl = function (show) {
+var AddDescriptionValidationErrorControl = function (show) {
     if (show) {
-        $('#DescriptionValidationText').show()
-        $('#DescriptionSeparator').hide();
+        $('#AddDescriptionValidationText').show()
+        $('#AddDescriptionSeparator').hide();
     } else {
-        $('#DescriptionValidationText').hide()
-        $('#DescriptionSeparator').show();
+        $('#AddDescriptionValidationText').hide()
+        $('#AddDescriptionSeparator').show();
     }
 }
 var FileValidationErrorControl = function (error, show) {
@@ -73,22 +54,61 @@ var FileValidationErrorControl = function (error, show) {
         $('#FileValidationText').hide();
     }
 }
-
-var ReadFileCallback = function (file, error) {
-    ValidateAddPhotoForm(file, error);
+var ModifyTitleValidationErrorControl = function (show) {
+    if (show) {
+        $('#ModifyTitleValidationText').show()
+        $('#ModifyTitleSeparator').hide();
+    } else {
+        $('#ModifyTitleValidationText').hide()
+        $('#ModifyTitleSeparator').show();
+    }
+}
+var ModifyDescriptionValidationErrorControl = function (show) {
+    if (show) {
+        $('#ModifyDescriptionValidationText').show()
+        $('#ModifyDescriptionSeparator').hide();
+    } else {
+        $('#ModifyDescriptionValidationText').hide()
+        $('#ModifyDescriptionSeparator').show();
+    }
 }
 
-var ValidateAddPhotoForm = function (photoFile, error) {
-    var titleValue = document.getElementById("TitleInput").value;
-    var descriptionValue = document.getElementById("DescriptionInput").value;
+//Cargar fotos
+var RefreshGallery = function () {
+    $.ajax({
+        url: "/Home/Gallery",
+        type: "post",
+        data: null
+    }).done(function (result) {
+        $("#Gallery").html(result);
+    });
+}
+
+//ABM
+var CreatePhotoModel = function (title, description, photoFile) {
+    var PhotoModel = {
+        Title: title,
+        Description: description,
+        PhotoFile: photoFile
+    }
+    return PhotoModel;
+}
+
+var ReadFileCallback = function (file, error, fileName) {
+    ValidateAddPhotoForm(file, error, fileName);
+}
+
+var ValidateAddPhotoForm = function (photoFile, error, fileName) {
+    var titleValue = document.getElementById("AddTitleInput").value;
+    var descriptionValue = document.getElementById("AddDescriptionInput").value;
 
     var formIsValid = true;
     if (IsNullOrEmpty(titleValue)) {
-        TitleValidationErrorControl(true);
+        AddTitleValidationErrorControl(true);
         formIsValid = false;
     }
     if (IsNullOrEmpty(descriptionValue)) {
-        DescriptionValidationErrorControl(true);
+        AddDescriptionValidationErrorControl(true);
         formIsValid = false;
     }
     if (error) {
@@ -96,18 +116,17 @@ var ValidateAddPhotoForm = function (photoFile, error) {
         formIsValid = false;
     }
 
+    if (!fileName.match(/\.(jpg|jpeg|png|gif)$/i)) {
+        alert('El archivo no es una imagen.');
+        formIsValid = false;
+    }
+        
     if (formIsValid) {
         AcceptNewPhoto(CreatePhotoModel(titleValue, descriptionValue, photoFile));
     }
-    //A VECES MEDIO QUE SE CIERRA SIN ERROR Y SE CHOTEA. EN INCÓGNITO CREO QUE NO PASA. VERLO.
 }
 
 var AcceptNewPhoto = function (photoModel) {
-    //var content = {
-    //    title: photoModel.Title,
-    //    description: photoModel.Description,
-    //    photoFile: photoModel.PhotoFile
-    //}
     var fd = new FormData();
     fd.append('title', photoModel.Title);
     fd.append('description', photoModel.Description);
@@ -118,57 +137,89 @@ var AcceptNewPhoto = function (photoModel) {
         processData: false,
         contentType: false,
         timeout: 10000,
-        /*url: HomeVM.Url + '/AddPhoto',*/
-        /*data: JSON.stringify(content),*/
         data: fd,
         success: function (data) {
-            alert("success");
-            CloseAddPhotoPopUp();
+            if (data == 404) {
+                alert("Hubo un error inesperado, reintente por favor.");
+            } else {
+                RefreshGallery();
+                CloseAddPhotoPopUp();
+                alert("La foto ha sido agregada exitosamente.");
+            }
         },
         error: function (xhr, ajaxOptions, thrownError) {
-            alert("error");
             CloseAddPhotoPopUp();
-            /*alert(xhr.responseText);*/
+            alert("Hubo un error inesperado, reintente por favor.");
         }
     });
 }
 
-var RefreshGallery = function () {
-    $.ajax({
-        url: "/Home/Gallery",
-        type: "post",
-        data: null
-    }).done(function (result) {
-            $("#Gallery").html(result);
-    });
-}
-
-var ModifyPhoto = function (id) {
+var DeletePhoto = function (id) {
     var fd = new FormData();
-    fd.append('id', id);
-    fd.append('title', photoModel.Title);
-    fd.append('description', photoModel.Description);
+    fd.append('Id', id);
     $.ajax({
-        url: 'Home/AddPhoto',
-        type: "POST",
+        url: 'Home/DeletePhoto',
+        type: "DELETE",
         processData: false,
         contentType: false,
         timeout: 10000,
-        /*url: HomeVM.Url + '/AddPhoto',*/
-        /*data: JSON.stringify(content),*/
         data: fd,
         success: function (data) {
-            alert("success");
-            CloseAddPhotoPopUp();
+            alert("La foto ha sido eliminada exitosamente.");
+            RefreshGallery();
         },
         error: function (xhr, ajaxOptions, thrownError) {
-            alert("error");
-            CloseAddPhotoPopUp();
-            /*alert(xhr.responseText);*/
+            alert("Hubo un error inesperado. Reintente por favor.");
         }
     });
 }
 
+var ValidateModifyPhotoForm = function () {
+    var titleValue = document.getElementById("ModifyTitleInput").value;
+    var descriptionValue = document.getElementById("ModifyDescriptionInput").value;
+
+    var formIsValid = true;
+    if (IsNullOrEmpty(titleValue)) {
+        ModifyTitleValidationErrorControl(true);
+        formIsValid = false;
+    }
+    if (IsNullOrEmpty(descriptionValue)) {
+        ModifyDescriptionValidationErrorControl(true);
+        formIsValid = false;
+    }
+
+    if (formIsValid) {
+        AcceptModifyPhoto(titleValue, descriptionValue);
+    }
+}
+
+var AcceptModifyPhoto = function (title, description) {
+    var fd = new FormData();
+    fd.append('id', IdToModify);
+    fd.append('title', title);
+    fd.append('description', description);
+    $.ajax({
+        url: 'Home/UpdatePhoto',
+        type: "PATCH",
+        processData: false,
+        contentType: false,
+        timeout: 10000,
+        data: fd,
+        success: function (data) {
+            if (data == 404) {
+                alert("Hubo un error inesperado, reintente por favor.");
+            } else {
+                RefreshGallery();
+                CloseModifyPhotoPopUp();
+                alert("La foto ha sido modificada exitosamente.");
+            }
+        },
+        error: function (xhr, ajaxOptions, thrownError) {
+            CloseAddPhotoPopUp();
+            alert("Hubo un error inesperado, reintente por favor.");
+        }
+    });
+}
 
 $(document).ready(function () {
     $("#ShowAddPhotoPopUpBtn").click(function () {
@@ -181,20 +232,15 @@ $(document).ready(function () {
         CloseModifyPhotoPopUp();
     });
     $("#AcceptModifyPhoto").click(function () {
-        ModifyPhoto();
+        ValidateModifyPhotoForm();
     });
-    
-    //$("#CloseBtn").click(function () {
-    //    ClearNewPhotoForm();
-    //});
     
     $('#TitleValidationText').hide();
     $('#DescriptionValidationText').hide();
     $('#FileValidationText').hide();
 
-    LoadLayoutDocumentReady();
     RefreshGallery();
-});
 
-//REPASAR BIEN TODO. BUENAS PRÁCTICAS. BREVE. SÓLIDO. CREATIVO. BUENOS NOMBRES DE COSAS. ETCS.
-//VER DE PONER RELOJITOS DE ESPERA Y ESA MERDA.
+    LoadLayoutDocumentReady();
+
+});

@@ -29,7 +29,6 @@ namespace PhotoManager
             services.AddScoped<IHomeService, HomeService>();
             services.AddScoped<IPhotoLogic, PhotoLogic>();
             services.AddMvc().AddRazorRuntimeCompilation();
-            services.Configure<AppCustomSettings>(Configuration.GetSection("AppCustomSettings"));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -10,7 +10,7 @@ namespace Logic.DataLogic.PhotoLogic
     public interface IPhotoLogic
     {
         Task<int> AddPhotoEntity(PhotoEntity photoEntity);
-        Task<int> UpdatePhotoEntity(PhotoEntity photoEntity);
+        Task<int> UpdatePhotoEntity(int id, string title, string description);
         Task<int> DeletePhotoEntity(int Id);
         Task<IEnumerable<PhotoEntity>> GetAllPhotos();
         Task<IEnumerable<PhotoEntity>> GetPhotosByCriteria(PhotoSearchCriteriaModel photoCriteriaModel);
