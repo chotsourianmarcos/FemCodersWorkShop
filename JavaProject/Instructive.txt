@@ -1,0 +1,3 @@
+0) Tener Visual Studio Code con Extension Pack for Java
+1) Abrir Carpeta JavaProject en Visual Studio Code
+2) Run/Debug el archivo JavaProject\Console\src\App.java
