@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Full Stack CV</title>
+    <!-- para bootstrap tmb es necesario agregar los .map 
+    obvio, mejor por CDN, pero para mostrar -->
+    <!-- bootstrap hace que el borde coma ancho en vez de incrementarlo -->
+    <link rel="stylesheet" href="../CSS/Shared/bootstrap.min.css" />
+    <link rel="stylesheet" href="../CSS/indexCSS.css" />
+    <!-- <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="../" type="text/css"> -->
+    <base target="_blank">
+</head>
+
+<body>
+
+    <div id="MainFrame">
+
+        <h4 id="Title">FullStack Dev SSr- Chotsourian Marcos</h4>
+
+        <div id="FirstRow">
+
+            <div id="PersonalDataFrame" class="subFrame">
+
+                <p class="fontSize16px noMarginBottom">&#x2022; chotsourian.marcos@gmail.com</p>
+                <p class="fontSize16px noMarginBottom">&#x2022; +34 611 58 65 57</p>
+                <p class="fontSize16px marginBottom5px">&#x2022; 19/06/1991</p>
+                <p class="fontSize16px noMarginBottom"><a class="blackColorLink"
+                        href="https://www.linkedin.com/in/marcos-chotsourian-019815207">&#x2022; LinkedIn</a></p>
+                <p class="fontSize16px noMarginBottom"><a class="blackColorLink"
+                        href="https://github.com/chotsourianmarcos/Portfolio-Chotsourian">&#x2022; Portfolio</a></p>
+
+            </div>
+
+            <div id="OcupationFrame" class="subFrame">
+                <p class="fontSize16px noMarginBottom">Cosas que hago...</p>
+                <p class="fontSize16px noMarginBottom">&#x2022; Co Formador FullStack</p>
+                <p class="fontSize16px noMarginBottom">&#x2022; Profesor de Ajedrez</p>
+                <p class="fontSize16px noMarginBottom">&#x2022; Caminar</p>
+                <p class="fontSize16px noMarginBottom">&#x2022; Tener plantas</p>
+            </div>
+
+            <div id="PhotoFrame" class="subFrame">
+                <img id="ProfileFoto" src="../Resources/Files/Images/ChotsourianMarcos.jpg" alt="Foto Laboral">
+            </div>
+
+        </div>
+
+        <!-- ver como ponerlo en otro archivo con buenas practicas -->
+        <div class="accordion" id="exampleAccordion">
+
+            <div class="card">
+                <div class="card-header" id="exItem1Header">
+                    <h5 class="mb-0">
+                        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#exItem1"
+                            aria-expanded="true" aria-controls="exItem1">
+                            Experiencia laboral en software
+                        </button>
+                    </h5>
+                </div>
+                <div id="exItem1" class="collapse show" aria-labelledby="exItem1Header" data-parent="#exampleAccordion">
+                    <div class="card-body">
+
+                        <p class="fontSize16px noMarginBottom">&#x2022; 10.2022 al presente - Co Formador FullStack
+                            en <a>FemCoders - Fundación Don Bosco Sevilla</a></p>
+                        <p class="fontSize16px noMarginBottom"><a class="blackColorLink"
+                                href="https://www.linkedin.com/in/antoniojosemengualrios">Referente: Director de la
+                                casa - Antonio Mengual</a></p>
+                        <div>
+                            <p class="fontSize16px noMarginBottom clickable"><a class="blackColorLink detail" value="Detail1">Detalle</a></p>
+                            <p class="fontSize16px noMarginBottom detailBody" id="Detail1">Co Formador de curso FullStack para mujeres en contextos sociales desfavorecidos, con pedagogía activa y aprendizaje basado en competencias y proyectos. En Fundación Don Bosco Sevilla, junto a Factoría F5 y Simplon. Stacks: HTML, CSS, JS, VUE, C# .NET Core, MySQL y GIT. </p>
+                        </div>
+                        </br>
+
+                        <p class="fontSize16px noMarginBottom">&#x2022; 05.2022 al 10.2022 - Desarrollador en
+                            Integraciones en <a>SG Fintech Argentina</a></p>
+                        <p class="fontSize16px noMarginBottom"><a class="blackColorLink"
+                                href="https://www.linkedin.com/in/dtartarelli">Referente: PM - Diego Tartarelli</a>
+                        </p>
+                        <p class="fontSize16px noMarginBottom"><a class="blackColorLink clickable detail" value="Detail2">Detalle</a></p>
+                        <p class="fontSize16px noMarginBottom detailBody" id="Detail2">Desarrollador en Integraciones en SG Fintech Argentina. A cargo de integración con clientes, detección, análisis y solución de bugs, planes de testeo y documentación. Stacks: HTML, CSS, JS, Angular, Flutter, C# .NET Core, SQL Server y GIT.</p>
+                        </br>
+
+                        <p class="fontSize16px noMarginBottom">&#x2022; 07.2021 al 04.2022 - FullStack Dev en
+                            <a>NEORIS Argentina</a>
+                        </p>
+                        <p class="fontSize16px noMarginBottom"><a class="blackColorLink"
+                                href="https://www.linkedin.com/in/walterdandini/">Referente: PM - Walter Dandini</a>
+                        </p>
+                        <p class="fontSize16px noMarginBottom"><a class="blackColorLink clickable detail" value="Detail3">Detalle</a></p>
+                        <p class="fontSize16px noMarginBottom detailBody" id="Detail3">Desarrollador FullStack en NEORIS Argentina. En proyecto de migración de un sistema administrativo de más de 800 pantallas. Stacks: HTML, CSS, JS, KnockoutJS, C# .NET Core MVC, SQL Server y GIT.</p>
+                        </br>
+
+                        <p class="fontSize16px noMarginBottom">&#x2022; 04.2021 al 07.2021 - DBA en <a>Comisión
+                                Nacional de Valores Argentina</a></p>
+                        <p class="fontSize16px noMarginBottom"><a class="blackColorLink"
+                                href="https://www.linkedin.com/in/miguel-carbonare-5289102/">Referente: PM - Miguel
+                                Ángel Carbonare</a></p>
+                        <p class="fontSize16px noMarginBottom"><a class="blackColorLink clickable detail" value="Detail4">Detalle</a></p>
+                        <p class="fontSize16px noMarginBottom detailBody" id="Detail4"">DBA en Comisión Nacional de Valores. Operación y mantenimiento básico de bases de datos. Stacks: SQL Server.</p>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header" id="exItem2Header">
+                    <h5 class="mb-0">
+                        <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
+                            data-target="#exItem2" aria-expanded="false" aria-controls="exItem2">
+                            Stacks con experiencia laboral
+                        </button>
+                    </h5>
+                </div>
+                <div id="exItem2" class="collapse" aria-labelledby="exItem2Header" data-parent="#exampleAccordion">
+                    <div class="card-body">This is the card body. Your content is hidden initially. It is shown by
+                        clicking on the card header.</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header" id="exItem3Header">
+                    <h5 class="mb-0">
+                        <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
+                            data-target="#exItem3" aria-expanded="false" aria-controls="exItem3">
+                            Estudios formales
+                        </button>
+                    </h5>
+                </div>
+                <div id="exItem3" class="collapse" aria-labelledby="exItem3Header" data-parent="#exampleAccordion">
+                    <div class="card-body">This is the card body. Your content is hidden initially. It is shown by
+                        clicking on the card header.</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header" id="exItem4Header">
+                    <h5 class="mb-0">
+                        <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
+                            data-target="#exItem4" aria-expanded="false" aria-controls="exItem4">
+                            Estudios no formales
+                        </button>
+                    </h5>
+                </div>
+                <div id="exItem4" class="collapse" aria-labelledby="exItem4Header" data-parent="#exampleAccordion">
+                    <div class="card-body">This is the card body. Your content is hidden initially. It is shown by
+                        clicking on the card header.</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header" id="exItem5Header">
+                    <h5 class="mb-0">
+                        <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
+                            data-target="#exItem5" aria-expanded="false" aria-controls="exItem5">
+                            Idiomas
+                        </button>
+                    </h5>
+                </div>
+                <div id="exItem5" class="collapse" aria-labelledby="exItem5Header" data-parent="#exampleAccordion">
+                    <div class="card-body">This is the card body. Your content is hidden initially. It is shown by
+                        clicking on the card header.</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header" id="exItem6Header">
+                    <h6 class="mb-0">
+                        <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
+                            data-target="#exItem6" aria-expanded="false" aria-controls="exItem6">
+                            Sobre mí
+                        </button>
+                    </h6>
+                </div>
+                <div id="exItem6" class="collapse" aria-labelledby="exItem6Header" data-parent="#exampleAccordion">
+                    <div class="card-body">This is the card body. Your content is hidden initially. It is shown by
+                        clicking on the card header.
+                        This is the card body. Your content is hidden initially. It is shown by
+                        clicking on the card header
+                        This is the card body. Your content is hidden initially. It is shown by
+                        clicking on the card header
+                        This is the card body. Your content is hidden initially. It is shown by
+                        clicking on the card header</div>
+                    This is the card body. Your content is hidden initially. It is shown by
+                    clicking on the card header
+                    This is the card body. Your content is hidden initially. It is shown by
+                    clicking on the card header
+
+                    This is the card body. Your content is hidden initially. It is shown by
+                    clicking on the card header
+                    This is the card body. Your content is hidden initially. It is shown by
+                    clicking on the card header
+                    This is the card body. Your content is hidden initially. It is shown by
+                    clicking on the card header
+
+                    This is the card body. Your content is hidden initially. It is shown by
+                    clicking on the card header
+                    This is the card body. Your content is hidden initially. It is shown by
+                    clicking on the card header
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- You need to load jquery first before bootstrap. -->
+    <script src="../JS/Shared/jquery.min.js"></script>
+    <script src="../JS/Shared/bootstrap.min.js"></script>
+    <!-- para bootstrap tmb es necesario agregar los .map 
+    obvio, mejor por CDN, pero para mostrar -->
+    <script src="../JS/indexJS.js"></script>
+    <!-- <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/Shared/Layout.js"></script>
+    @RenderSection("Scripts", required: false) -->
+</body>
+
+</html>
+
+
+<!-- BUENO, NI IDEA. RESOLVER BIEN ESO DE MOSTRAR Y OCULTAR Y RELACIONAR OBJETOS Y ESO -->
+<!-- VER BUENAS PRACTICAS... -->
