@@ -1,6 +1,5 @@
-//shorthand for document ready:
 $(function() {
-    console.log("ready!");
+    // console.log("Doc ready!");
     $('.detailBody').hide();
 });
 
