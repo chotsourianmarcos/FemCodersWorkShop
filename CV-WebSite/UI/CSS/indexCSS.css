@@ -1,0 +1,94 @@
+body{
+    background-color: rgb(205, 219, 210);
+}
+
+*{
+    -webkit-box-sizing: content-box;
+       -moz-box-sizing: content-box;
+            box-sizing: content-box;
+  }
+
+*:before,
+*:after {
+-webkit-box-sizing: content-box;
+    -moz-box-sizing: content-box;
+        box-sizing: content-box;
+}
+
+p{
+    font-size: 16px;
+    margin-bottom: 0px;
+}
+
+a{
+    color: black !important;
+}
+
+.subFrame{
+    border: 1px solid black;
+    border-radius: 5%;
+    float: left;
+    box-shadow: 2px 2px 2px 1px rgb(157, 163, 159);
+    background-color: rgba(247,247,247,255);
+    padding: 5px;
+}
+
+.clickable:hover{
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.bold{
+    font-weight: bold;
+};
+
+.card{
+    border: 1px black solid;
+}
+
+.btn-link{
+    color: black !important;
+}
+
+#MainFrame{
+    height: auto;
+    width: 612px;
+    background-color: rgb(177, 218, 191);
+    margin: 15px auto;
+    padding: 10px 25px 10px 25px;
+    box-shadow: 10px 10px 10px 0px rgb(83, 102, 90);
+    border-radius: 1%;
+}
+
+#PersonalDataFrame{
+    height: 130px;
+    width: 250px;
+    margin-right: 15px;
+}
+
+#OcupationFrame{
+    height: 130px;
+    width: 170px;
+    margin-right: 11px;
+}
+
+#PhotoFrame{
+    height: 140px;
+    width: 140px;
+    border-radius: 50%;
+}
+
+#FirstRow{
+    margin-bottom: 13px;
+    height: 140px;
+}
+
+#PhotoFrame {
+    padding: 0 0 0 0 !important;
+}
+
+#ProfileFoto{
+    width: 100%;
+    height : 100%;
+    border-radius: 50%;
+}
