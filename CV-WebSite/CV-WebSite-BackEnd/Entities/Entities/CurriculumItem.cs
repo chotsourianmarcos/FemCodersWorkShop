@@ -20,7 +20,7 @@ namespace Entities.Entities
         public Guid IdWeb { get; set; }
         public int OwnerId { get; set; }
         public DateTime InsertDate { get; set; }
-        public DateTime UpdateDate { get; set; }
+        public DateTime? UpdateDate { get; set; }
         public bool IsActive { get; set; }
         public bool IsPublic { get; set; }
         private string UserPassword { get; set; }

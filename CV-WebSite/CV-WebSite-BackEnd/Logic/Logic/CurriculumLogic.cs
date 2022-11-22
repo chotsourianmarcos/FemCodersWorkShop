@@ -18,6 +18,7 @@ namespace Logic.Logic
         public void InsertCurriculumItem(CurriculumItem curriculumItem)
         {
             _CVContext.Curriculums.Add(curriculumItem);
+            _CVContext.SaveChanges();
         }
     }
 }
