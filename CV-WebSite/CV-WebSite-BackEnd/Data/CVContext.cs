@@ -11,7 +11,7 @@ namespace Data
 {
     public class CVContext : DbContext
     {
-        public CVContext() : base("name = CVContext") { }
+        public CVContext() : base("CVContext") { }
 
         public DbSet<CurriculumItem> Curriculums { get; set; }
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

@@ -16,6 +16,9 @@ try
     newCurriculum.IsActive = true;
     newCurriculum.IsPublic = true;
     newCurriculum.Content = "Not Implemented Yet.";
+    newCurriculum.ProfessionalArea = "Software";
+    newCurriculum.TesetMigration1 = "TesetMigration1";
+    newCurriculum.TesetMigrationX = "TesetMigrationX";
     curriculumLogic.InsertCurriculumItem(newCurriculum);
     Console.WriteLine("Curriculum insertado...");
 }catch(Exception e)

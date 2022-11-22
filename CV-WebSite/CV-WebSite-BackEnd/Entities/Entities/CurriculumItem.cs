@@ -25,6 +25,9 @@ namespace Entities.Entities
         public bool IsPublic { get; set; }
         private string UserPassword { get; set; }
         public string Content { get; set; } //not implemented content
+        public string ProfessionalArea { get; set; }
+        public string TesetMigration1 { get; set; }
+        public string TesetMigrationX { get; set; }
 
         public void UserDiactivation(string inputPassword)
         {
